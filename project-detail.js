@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainNav = document.getElementById('mainNav');
   const navLinks = document.querySelectorAll('.main-nav a');
 
+  // START OF CHANGE: Added checks for existence before adding event listeners
   if (menuToggle && mainNav) {
     menuToggle.addEventListener('click', () => {
       mainNav.classList.toggle('active');
@@ -46,8 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+  // END OF CHANGE
 });
 
-// Note: The `openModal()` function for the quiz button is assumed to be
-// globally available, likely defined in `script.js` or another shared file.
+// Note: The `openModal()` function for the quiz button was removed from the HTML.
 // It is not redefined here to avoid duplication.
