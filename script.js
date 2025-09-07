@@ -1,985 +1,126 @@
-:root {
-  --bg: #0e0f14;
-  --bg-darker: #13151b; /* Slightly lighter dark for contrast */
-  --text: #f5f6fa;
-  --muted: #a5aab5;
-  --accent: #6366f1; /* Primary accent blue/purple */
-  --accent2: #00d2ff; /* Secondary accent cyan */
-  --grad: linear-gradient(135deg, var(--accent), var(--accent2));
-  --grad-hover: linear-gradient(135deg, var(--accent2), var(--accent)); /* Reversed for hover */
-  --border-radius-sm: 8px;
-  --border-radius-md: 12px;
-  --border-radius-lg: 16px;
-  --max-width-content: 1200px;
-  --nav-height: 70px; /* Slightly taller navbar */
+// SCRIPT INITIALIZATION
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Initialize AOS (Animation on Scroll)
+  AOS.init({ duration: 700, once: true });
 
-  font-family: 'Poppins', sans-serif;
-  color-scheme: dark;
-}
-
-/* Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-
-a {
-  color: var(--accent2);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: var(--text);
-}
-
-h1, h2, h3 {
-  font-weight: 700;
-  margin-bottom: 0.8em;
-  line-height: 1.2;
-}
-
-p {
-  margin-bottom: 1em;
-}
-
-.container {
-  max-width: var(--max-width-content);
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.section-padded {
-  padding: 80px 0; /* Vertical padding for sections */
-}
-
-.bg-darker {
-  background-color: var(--bg-darker);
-}
-
-.bg-gradient {
-  background: var(--grad);
-  color: #fff;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.section-description {
-  font-size: 1.1em;
-  color: var(--muted);
-  max-width: 800px;
-  margin: 0 auto 40px;
-}
-
-.section-description.large {
-  font-size: 1.25em;
-  font-weight: 300;
-  margin-bottom: 50px;
-}
-
-/* Buttons */
-.cta-btn {
-  padding: 14px 28px;
-  border-radius: var(--border-radius-md);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1em;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  position: relative; /* This ensures z-index works */
-  z-index: 5;         /* This lifts the button above any overlapping elements */
-}
-
-.cta-btn.primary {
-  background: var(--grad);
-  border: none;
-  color: #fff;
-}
-
-.cta-btn.primary:hover {
-  background: var(--grad-hover);
-  box-shadow: 0 8px 20px rgba(0, 210, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.cta-btn.secondary {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--text);
-}
-
-.cta-btn.secondary:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  border-color: var(--accent2);
-  color: var(--accent2);
-  transform: translateY(-2px);
-}
-
-.cta-btn.outline {
-  background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  color: #fff;
-}
-
-.cta-btn.outline:hover {
-  border-color: #fff;
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
-
-.cta-btn.large {
-  padding: 16px 32px;
-  font-size: 1.1em;
-  border-radius: var(--border-radius-lg);
-}
-
-/* Navbar */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--nav-height);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  background: rgba(14, 15, 20, 0.7);
-  backdrop-filter: blur(15px);
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-header .logo {
-  font-weight: 800;
-  font-size: 24px;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
-}
-
-header nav a {
-  margin: 0 15px;
-  color: var(--muted);
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-}
-
-header nav a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 0%;
-  height: 2px;
-  background: var(--accent2);
-  transition: width 0.3s ease;
-}
-
-header nav a:hover {
-  color: var(--text);
-}
-
-header nav a:hover::after {
-  width: 100%;
-}
-
-/* START OF CHANGE: Removed quiz-btn styling */
-/* The .quiz-btn styles were removed as the button has been removed */
-/* END OF CHANGE */
-
-.menu-toggle {
-  background: none;
-  border: none;
-  color: var(--text);
-  font-size: 1.5em;
-  cursor: pointer;
-  display: none;
-}
-
-/* Mobile Nav Styles */
-.main-nav {
-  display: flex;
-}
-
-/* Hero */
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  text-align: center;
-  overflow: hidden;
-  padding-top: var(--nav-height);
-}
-
-.hero-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.2) 0%, transparent 40%),
-              radial-gradient(circle at bottom right, rgba(0, 210, 255, 0.15) 0%, transparent 50%),
-              var(--bg-darker);
-  opacity: 0.7;
-  transform: scale(1.05);
-  z-index: 1;
-}
-
-/* MODIFIED CODE FOR PAPER PLANE ANIMATION */
-.paper-plane-animation {
-  position: absolute;
-  width: 80px; /* Adjust size as needed */
-  height: auto;
-  opacity: 0.7; /* Make it slightly transparent */
-  pointer-events: none; /* Allows clicks to pass through to elements behind it */
-  animation: flyAcross 15s linear infinite; /* Adjust duration for speed */
-  z-index: 3; /* Ensure it's above hero-content (z-index: 2) and hero-bg (z-index: 1) */
-  filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.3)); /* Subtle glow */
-  mix-blend-mode: screen; /* Used to remove black background for white plane */
-  transform-origin: 100% 0%; /* Set rotation origin to top-right tip */
-}
-
-@keyframes flyAcross {
-  0% {
-    top: 40%;
-    left: -10%; /* Start off-screen left */
-    transform: rotate(5deg) scale(0.9) scaleX(1); /* Facing right */
+  // 2. Initialize Swiper Slider for Activities
+  // Added a check for .activity-slider to only initialize Swiper if the element exists
+  const activitySlider = document.querySelector('.activity-slider');
+  if (activitySlider) {
+    const swiper = new Swiper('.activity-slider', {
+      loop: true,
+      grabCursor: true,
+      slidesPerView: 1,
+      spaceBetween: 30,
+      breakpoints: {
+        768: { slidesPerView: 2, spaceBetween: 30 },
+        1024: { slidesPerView: 3, spaceBetween: 30 }
+      },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      // START OF CHANGE: Added Autoplay configuration
+      autoplay: {
+        delay: 3000, // 3 seconds delay between slides
+        disableOnInteraction: false, // Continue autoplay even after user interaction
+      },
+      // END OF CHANGE
+    });
   }
-  49% {
-    top: 30%;
-    left: 110%; /* Off screen right */
-    transform: rotate(0deg) scale(1) scaleX(1); /* Still facing right */
+
+
+  // 3. Mobile Menu Logic
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+  const navLinks = document.querySelectorAll('.main-nav a');
+
+  // START OF CHANGE: Added checks for existence before adding event listeners
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+    });
   }
-  50% { /* Instant flip as it crosses the boundary */
-    top: 30%;
-    left: 110%;
-    transform: rotate(0deg) scale(1) scaleX(-1); /* Flipped to face left */
+
+  if (navLinks) {
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (mainNav && mainNav.classList.contains('active')) {
+          mainNav.classList.remove('active');
+        }
+      });
+    });
   }
-  99% {
-    top: 40%;
-    left: -10%; /* Off screen left */
-    transform: rotate(5deg) scale(0.9) scaleX(-1); /* Still facing left */
-  }
-  100% { /* Instant flip back to right for next loop iteration */
-    top: 40%;
-    left: -10%;
-    transform: rotate(5deg) scale(0.9) scaleX(1); /* Back to facing right for the next loop */
-  }
-}
-/* END MODIFIED CODE FOR PAPER PLANE ANIMATION */
-
-/* NEW: Styles for the flight text animation */
-.flight-text-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Crucial: allows interaction with elements beneath */
-  z-index: 4; /* Above the plane (z-index 3) but below interactive hero content */
-  overflow: hidden; /* Keep texts within hero boundaries */
-}
-
-.flight-text {
-  position: absolute;
-  color: var(--accent2); /* Or any color that stands out */
-  font-size: 1.2em;
-  font-weight: 600;
-  opacity: 0;
-  animation: fadeAndFloat 3s ease-out forwards; /* Adjust duration and timing */
-  white-space: nowrap; /* Keep "Wheeee!" on one line */
-  text-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
-  transform: translate(-50%, -50%); /* Center text based on its own dimensions */
-}
-
-@keyframes fadeAndFloat {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translateY(0px) scale(0.8);
-  }
-  20% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translateY(-10px) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translateY(-50px) scale(1.2);
-  }
-}
-/* END NEW STYLES */
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  padding: 20px;
-}
-
-.hero-logo {
-  display: block; /* Centers the image */
-  margin: 0 auto 30px auto; /* Centers horizontally and adds bottom margin */
-  max-width: 180px; /* Adjust as needed */
-  height: auto;
-  filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.4)); /* Subtle glow */
-}
-
-.hero-text h1 {
-  font-size: 4.5em;
-  font-weight: 800;
-  margin-bottom: 0.3em;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.1;
-  text-shadow: 0 5px 20px rgba(0, 210, 255, 0.2);
-}
-
-.hero-text .subtitle {
-  font-size: 1.5em;
-  color: var(--muted);
-  margin-bottom: 2em;
-  font-weight: 300;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero-cta-buttons {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* About Section */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.about-text h2 {
-  font-size: 2.5em;
-  font-weight: 800;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.about-text p {
-  font-size: 1.1em;
-  color: var(--muted);
-}
-
-.about-image img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--border-radius-lg);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* Projects */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 50px;
-}
-
-.project-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  flex-direction: column;
-  min-height: 400px; /* UPDATED: Ensure minimum height */
-}
-
-.project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0, 210, 255, 0.1);
-  border-color: rgba(0, 210, 255, 0.3);
-}
-
-.project-thumbnail {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.project-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.project-card:hover .project-thumbnail img {
-  transform: scale(1.05);
-}
-
-.project-card h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  color: var(--text);
-  padding: 0 20px;
-}
-
-/* UPDATED: Project description styling - simplified for modal approach */
-.project-description-wrapper {
-  max-height: 100px;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 20px;
-  padding: 0 20px;
-  flex-grow: 1;
-}
-
-.project-description-wrapper p {
-  margin-bottom: 0;
-}
-
-/* Fade-out effect for collapsed text */
-.project-description-wrapper::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 20px;
-  right: 20px;
-  height: 40px;
-  background: linear-gradient(to top, var(--bg-darker) 0%, transparent 100%);
-  pointer-events: none;
-}
-
-/* UPDATED: Project link positioning - now opens modal */
-.project-link {
-  display: inline-block;
-  color: var(--accent2);
-  font-weight: 600;
-  margin: 0 20px 20px 20px;
-  padding: 8px 0;
-  transition: color 0.3s ease, transform 0.3s ease;
-  position: relative;
-  z-index: 10;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-.project-link:hover {
-  color: var(--accent);
-  transform: translateX(5px);
-}
-
-/* Video Player in Media Section */
-.single-video-player {
-  max-width: 640px;
-  margin: 0 auto;
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.single-video-player video {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Styles for Media Social Links */
-.media-socials {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.media-socials .cta-btn i {
-  font-size: 1.2em;
-}
-
-/* Activities Slider */
-.activity-slider {
-  width: 100%;
-  padding-bottom: 50px;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
-
-.activity-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  text-align: left;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  height: 100%; /* Keep this for activity cards, they don't have the same long text issue */
-  transition: all 0.3s ease;
-}
-
-.activity-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(0, 210, 255, 0.3);
-}
-
-.activity-thumbnail {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.activity-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.activity-card h3 {
-  font-size: 1.5em;
-  color: var(--text);
-  padding: 0 20px;
-  margin-bottom: 10px;
-}
-
-.activity-card p {
-  font-size: 0.95em;
-  color: var(--muted);
-  padding: 0 20px 20px;
-}
-
-/* Swiper Customization */
-.swiper-pagination-bullet-active {
-  background: var(--accent2) !important;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-  color: var(--accent2) !important;
-  transition: color 0.3s ease;
-  z-index: 10 !important;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  color: var(--text) !important;
-}
-
-/* Join Section */
-.join-section {
-  padding: 100px 20px;
-  border-radius: var(--border-radius-lg);
-  margin: 80px auto;
-  max-width: var(--max-width-content);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 10px rgba(255, 255, 255, 0.05) inset;
-}
-
-.join-section h2 {
-  font-size: 3em;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-/* START OF CHANGE: Force white color for the specific description in join-section */
-.join-section .section-description.large {
-  color: #fff; /* Ensures this text is white against the gradient background */
-}
-/* END OF CHANGE */
-
-.join-actions {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
-  margin-top: 40px;
-}
-
-/* Footer */
-footer {
-  background: var(--bg-darker);
-  padding: 60px 20px 30px;
-  color: var(--muted);
-  font-size: 0.95em;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
-.footer-col h3 {
-  color: var(--text);
-  margin-bottom: 20px;
-  font-size: 1.2em;
-}
-
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-col ul li {
-  margin-bottom: 10px;
-}
-
-.footer-col ul li a {
-  color: var(--muted);
-  transition: color 0.3s ease;
-}
-
-.footer-col ul li a:hover {
-  color: var(--accent2);
-}
-
-.footer-about .footer-logo {
-  max-width: 120px;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.3));
-}
-
-.social-links {
-  margin-top: 20px;
-  display: flex;
-  gap: 15px;
-}
-
-.social-links a {
-  color: var(--muted);
-  font-size: 1.5em;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-links a:hover {
-  color: var(--accent2);
-  transform: translateY(-3px);
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  font-size: 0.85em;
-}
-
-/* START OF CHANGE: Removed all quiz-related modal styles */
-/* The following styles are removed as the quiz button and its modal functionality have been removed. */
-/*
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.modal.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-content {
-  background: var(--bg-darker);
-  padding: 30px;
-  border-radius: var(--border-radius-lg);
-  width: 90%;
-  max-width: 450px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  transform: scale(0.9);
-  transition: transform 0.3s ease;
-}
-
-.modal.active .modal-content {
-  transform: scale(1);
-}
-
-.modal-content h3 {
-  margin-bottom: 20px;
-  font-size: 1.8em;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.options button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: var(--border-radius-md);
-  border: none;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text);
-  cursor: pointer;
-  font-weight: 500;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.options button:hover {
-  background: var(--grad);
-  color: #fff;
-  transform: translateX(5px);
-}
-
-.modal-close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 1.5em;
-  cursor: pointer;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.modal-close-btn:hover {
-  color: var(--accent2);
-  transform: rotate(90deg);
-}
-
-
-#quizBody {
-  margin-bottom: 20px;
-}
-
-#quizBody p {
-  font-size: 1.2em;
-  color: var(--text);
-  margin-bottom: 25px;
-  font-weight: 300;
-}
-
-#quizBody strong {
-  font-weight: 600;
-  color: var(--accent2);
-}
-
-.quiz-input-group {
-  margin-top: 15px;
-}
-
-.quiz-input-group input[type="text"] {
-  width: 100%;
-  padding: 12px;
-  border-radius: var(--border-radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text);
-  font-family: 'Poppins', sans-serif;
-  font-size: 1em;
-  margin-bottom: 15px;
-  transition: border-color 0.3s ease;
-}
-
-.quiz-input-group input[type="text"]:focus {
-  outline: none;
-  border-color: var(--accent2);
-}
-
-.quiz-input-group button {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  border-radius: var(--border-radius-md);
-  border: none;
-  background: var(--grad);
-  color: #fff;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 1em;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.quiz-input-group button:hover {
-  background: var(--grad-hover);
-  transform: translateY(-2px);
-}
-*/
-/* END OF CHANGE: Removed all quiz-related modal styles */
-
-
-/* Responsive Media Queries */
-@media (max-width: 992px) {
-  .hero-text h1 {
-    font-size: 3.5em;
-  }
-  .hero-text .subtitle {
-    font-size: 1.3em;
-  }
-  .about-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .about-image {
-    margin-top: 40px;
+  // END OF CHANGE
+});
+
+// PROJECT MODAL LOGIC (Kept as is, though project links no longer use it)
+// These functions and listeners are for a general '.project-modal' if it were to be used.
+// They are not related to the 'quiz' modal that was removed.
+function openProjectModal(projectId) {
+  console.log('Opening modal for:', projectId); // Debug log
+  const modal = document.getElementById(projectId + 'Modal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    console.log('Modal opened successfully'); // Debug log
+  } else {
+    console.error('Modal not found:', projectId + 'Modal'); // Debug log
   }
 }
 
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-    z-index: 1001;
+function closeProjectModal(projectId) {
+  console.log('Closing modal for:', projectId); // Debug log
+  const modal = document.getElementById(projectId + 'Modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    console.log('Modal closed successfully'); // Debug log
+  } else {
+    console.error('Modal not found:', projectId + 'Modal'); // Debug log
   }
-  .main-nav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: var(--bg);
-    justify-content: center;
-    align-items: center;
-  }
-  .main-nav.active {
-    display: flex;
-  }
-  header nav a {
-    margin: 20px 0;
-    font-size: 1.5em;
-  }
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    /* START OF CHANGE: Adjusted for single button in nav-actions */
-    justify-content: flex-end; /* Align the menu toggle to the right */
-    /* END OF CHANGE */
-  }
-  .hero-text h1 {
-    font-size: 2.8em;
-    line-height: 1.2;
-  }
-  .hero-text .subtitle {
-    font-size: 1.1em;
-  }
-  .hero-cta-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  .hero-cta-buttons .cta-btn {
-    width: 80%;
-    max-width: 300px;
-    justify-content: center;
-  }
-  .section-padded {
-    padding: 60px 0;
-  }
-  .join-section h2 {
-    font-size: 2.2em;
-  }
-  .footer-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .social-links {
-    justify-content: center;
-  }
-
-  .hero-logo {
-    max-width: 120px; /* Smaller on mobile */
-    margin-bottom: 20px;
-  }
-
-  /* MODIFIED CODE FOR PAPER PLANE ANIMATION (MOBILE ADJUSTMENT) */
-  .paper-plane-animation {
-    width: 60px; /* Smaller on mobile */
-    animation: flyAcrossMobile 12s linear infinite; /* Potentially different path/speed */
-    mix-blend-mode: screen; /* Used to remove black background for white plane */
-    transform-origin: 100% 0%; /* Set rotation origin to top-right tip */
-  }
-
-  @keyframes flyAcrossMobile {
-    0% {
-      top: 25%;
-      left: -15%;
-      transform: rotate(10deg) scale(0.8) scaleX(1); /* Facing right */
-    }
-    49% {
-      top: 35%;
-      left: 115%;
-      transform: rotate(0deg) scale(0.9) scaleX(1); /* Still facing right */
-    }
-    50% { /* Instant flip as it crosses the boundary */
-      top: 35%;
-      left: 115%;
-      transform: rotate(0deg) scale(0.9) scaleX(-1); /* Flipped to face left */
-    }
-    99% {
-      top: 25%;
-      left: -15%;
-      transform: rotate(10deg) scale(0.8) scaleX(-1); /* Still facing left */
-    }
-    100% { /* Instant flip back to right for next loop iteration */
-      top: 25%;
-      left: -15%;
-      transform: rotate(10deg) scale(0.8) scaleX(1); /* Back to facing right for the next loop */
-    }
-  }
-  /* END MODIFIED CODE FOR PAPER PLANE ANIMATION (MOBILE ADJUSTMENT) */
 }
 
-@media (max-width: 480px) {
-  .hero-text h1 {
-    font-size: 2.2em;
+// Close modal when clicking outside the content
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('project-modal')) {
+    const modalId = e.target.id.replace('Modal', '');
+    closeProjectModal(modalId);
   }
-  .hero-text .subtitle {
-    font-size: 1em;
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const activeModals = document.querySelectorAll('.project-modal.active');
+    activeModals.forEach(modal => {
+      const modalId = modal.id.replace('Modal', '');
+      closeProjectModal(modalId);
+    });
   }
-  .cta-btn.large {
-    padding: 14px 28px;
-    font-size: 1em;
-  }
-  .project-card h3 {
-    font-size: 1.3em;
-  }
-  .hero-logo {
-    max-width: 100px; /* Even smaller on very small screens */
-    margin-bottom: 15px;
-  }
-  /* MODIFIED CODE FOR PAPER PLANE ANIMATION (VERY SMALL MOBILE ADJUSTMENT) */
-  .paper-plane-animation {
-    width: 40px;
-    mix-blend-mode: screen; /* Used to remove black background for white plane */
-    transform-origin: 100% 0%; /* Set rotation origin to top-right tip */
-  }
-  /* END MODIFIED CODE FOR PAPER PLANE ANIMATION (VERY SMALL MOBILE ADJUSTMENT) */
-}
+});
+
+// START OF UPDATE: Project Details Data Object
+// This object holds the full descriptions for each project,
+// which will be used by the new project-detail.html page.
+const projectDetails = {
+  "cubesat": {
+    title: "CubeSat for Real-Time Weather Prediction",
+    fullDescription: "The CubeSat for Real-Time Weather Prediction project is an innovative step toward improving the way we monitor and forecast weather conditions. Using a low-cost, lightweight satellite model (CubeSat) mounted on a drone, we aim to create a scalable, accessible platform for atmospheric data collection. This project involves the design, development, and deployment of a miniature satellite equipped with environmental sensors to gather critical meteorological data. The data collected (temperature, humidity, pressure, wind speed, etc.) is then transmitted in real-time to ground stations for processing. The long-term goal is to integrate this data into predictive models to enhance local weather forecasting accuracy and provide valuable insights for agricultural planning, disaster preparedness, and urban development. This project fosters interdisciplinary skills in aerospace engineering, data science, and telecommunications.",
+  },
+  "drone": {
+    title: "Custom-Built Drone Development",
+    fullDescription: "At SAOSC, we believe that true learning comes from building and applying technology with our own hands. Our Custom-Built Drone Development & Applications Project is a testament to this philosophy. Instead of relying on pre-assembled kits, we took the challenge of designing, assembling, and testing a drone ourselves. This project covers all aspects of drone engineering, from selecting appropriate motors, propellers, and flight controllers to designing and fabricating the frame using lightweight materials. Members gain experience in electronics, aerodynamics, programming (for flight control and autonomous missions), and remote sensing. Practical applications include aerial photography, package delivery simulations, environmental monitoring, and search and rescue scenarios. This hands-on experience provides a deep understanding of unmanned aerial vehicle (UAV) systems and their potential.",
+  },
+  "rcplane": {
+    title: "Design and Development of an RC Fixed-Wing Aircraft",
+    fullDescription: "The Design and Development of an RC Fixed-Wing Aircraft project was our entry point into the world of aeronautics and model aircraft engineering. With curiosity as our guide and a determination to learn, we set out to design and fly our very own RC plane. This project encompasses fundamental aerodynamic principles, material selection, structural design, and remote control systems integration. Students learn about airfoil design, thrust-to-weight ratio, stability, and control mechanisms. The practical build experience, from cutting and shaping foam or balsa wood to installing electronics and conducting flight tests, offers invaluable insights into the challenges and rewards of aerospace design. It serves as a strong foundation for more complex aerial vehicle projects.",
+  },
+  "aiml": {
+    title: "An AI/ML Framework for Smart Data Prediction",
+    fullDescription: "The AI/ML Framework for Smart Data Prediction project aims to revolutionize how we analyze and interpret complex datasets within aerospace and other domains. We're developing a robust, open-source framework that leverages artificial intelligence and machine learning algorithms to identify patterns, predict outcomes, and automate decision-making processes. This project involves working with large datasets, selecting and training various ML models (e.g., neural networks, regression models), and deploying them for real-time inference. Applications include predictive maintenance for aircraft, optimized flight path planning, anomaly detection in sensor data, and intelligent resource allocation. Members enhance their skills in Python programming, data science, machine learning, and cloud computing, preparing them for the rapidly evolving field of AI-driven aerospace innovation.",
+  },
+  "arduino": {
+    title: "ARDUINO BASED OBJECT AVOIDANCE CAR",
+    fullDescription: "The Arduino-Based Object Avoidance Car project was one of our first steps into the world of electronics, robotics, and embedded systems. Our goal was not just to build a moving car, but to understand how sensors, microcontrollers, and actuators work together to create intelligent behavior. This project involved assembling a chassis, mounting ultrasonic sensors for obstacle detection, integrating motor drivers, and programming an Arduino microcontroller to process sensor data and control the car's movement. Students learned about basic circuit design, C++ programming for Arduino, digital and analog inputs, and algorithm development for autonomous navigation. It’s an excellent introductory project that demystifies robotics and provides a tangible understanding of how code interacts with the physical world.",
+  },
+};
+// END OF UPDATE: Project Details Data Object
