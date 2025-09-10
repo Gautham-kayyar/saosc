@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
       // START OF CHANGE: Added Autoplay configuration
       autoplay: {
-        delay: 3000, // 3 seconds delay between slides
+        delay: 5000, // 5 seconds delay between slides
         disableOnInteraction: false, // Continue autoplay even after user interaction
       },
       // END OF CHANGE
@@ -57,3 +57,4 @@ document.addEventListener("DOMContentLoaded", () => {
 // were removed as they are no longer used by the website. Project details are now
 // handled by the project-detail.html page, and the data has been moved to data.js.
 // END OF UPDATE
+
